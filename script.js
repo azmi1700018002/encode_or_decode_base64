@@ -22,3 +22,19 @@ decodeBtn.addEventListener('click', () => {
         result.value = 'Error decoding text: Invalid Base64 string';
     }
 });
+
+result.addEventListener('click', () => {
+    if (result.value) {
+        navigator.clipboard.writeText(result.value)
+            .then(() => {
+                const originalValue = result.value;
+                result.value = 'Copied to clipboard!';
+                setTimeout(() => {
+                    result.value = originalValue;
+                }, 1500);
+            })
+            .catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+    }
+});
